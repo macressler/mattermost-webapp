@@ -236,7 +236,7 @@ export default class SidebarRightMenu extends React.Component {
                 }
             }
 
-            if (moreTeams) {
+            if (moreTeams && !global.window.mm_config.DefaultTeamName) {
                 joinAnotherTeamLink = (
                     <li key='joinTeam_li'>
                         <Link to='/select_team'>
