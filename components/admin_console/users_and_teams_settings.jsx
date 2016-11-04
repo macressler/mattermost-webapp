@@ -5,6 +5,7 @@ import React from 'react';
 
 import * as Utils from 'utils/utils.jsx';
 import Constants from 'utils/constants.jsx';
+import TeamStore from 'stores/team_store.jsx';
 
 import AdminSettings from './admin_settings.jsx';
 import BooleanSetting from './boolean_setting.jsx';
@@ -23,6 +24,16 @@ export default class UsersAndTeamsSettings extends AdminSettings {
         this.getConfigFromState = this.getConfigFromState.bind(this);
 
         this.renderSettings = this.renderSettings.bind(this);
+        this.teamValues = this.teamValues.bind(this);
+
+        this.state = this.getStateFromStores(false);
+    }
+
+    getStateFromStores() {
+        return {
+            ...this.state,
+            teams: TeamStore.getAll()
+        };
     }
 
     getConfigFromState(config) {
@@ -34,6 +45,7 @@ export default class UsersAndTeamsSettings extends AdminSettings {
         config.TeamSettings.TeammateNameDisplay = this.state.teammateNameDisplay;
         config.TeamSettings.MaxChannelsPerTeam = this.parseIntNonZero(this.state.maxChannelsPerTeam, Constants.DEFAULT_MAX_CHANNELS_PER_TEAM);
         config.TeamSettings.MaxNotificationsPerChannel = this.parseIntNonZero(this.state.maxNotificationsPerChannel, Constants.DEFAULT_MAX_NOTIFICATIONS_PER_CHANNEL);
+        config.TeamSettings.DefaultTeamName = this.state.DefaultTeamName;
 
         return config;
     }
@@ -47,7 +59,8 @@ export default class UsersAndTeamsSettings extends AdminSettings {
             restrictDirectMessage: config.TeamSettings.RestrictDirectMessage,
             teammateNameDisplay: config.TeamSettings.TeammateNameDisplay,
             maxChannelsPerTeam: config.TeamSettings.MaxChannelsPerTeam,
-            maxNotificationsPerChannel: config.TeamSettings.MaxNotificationsPerChannel
+            maxNotificationsPerChannel: config.TeamSettings.MaxNotificationsPerChannel,
+            DefaultTeamName: config.TeamSettings.DefaultTeamName
         };
     }
 
@@ -58,6 +71,19 @@ export default class UsersAndTeamsSettings extends AdminSettings {
                 defaultMessage='Users and Teams'
             />
         );
+    }
+
+    teamValues() {
+        const teamValues = [];
+        const teams = this.state.teams;
+
+        for (const id in teams) {
+            if (teams[id]) {
+                teamValues.push({value: teams[id].name, text: teams[id].display_name});
+            }
+        }
+        teamValues.unshift({value: '', text: 'No Defalut'});
+        return teamValues;
     }
 
     renderSettings() {
@@ -210,6 +236,25 @@ export default class UsersAndTeamsSettings extends AdminSettings {
                         />
                     }
                     value={this.state.teammateNameDisplay}
+                    onChange={this.handleChange}
+                />
+                <DropdownSetting
+                    id='DefaultTeamName'
+                    values={this.teamValues()}
+                    label={
+                        <FormattedMessage
+                            id='admin.team.DefaultTeamName'
+                            defaultMessage='Set a default team:'
+                        />
+                    }
+                    placeholder={Utils.localizeMessage('admin.team.DefaultTeamName', 'Ex "example-team"')}
+                    helpText={
+                        <FormattedMessage
+                            id='admin.team.DefaultTeamName'
+                            defaultMessage='When set, users will be automatically redirected to this team page skipping the team selection page.'
+                        />
+                    }
+                    value={this.state.DefaultTeamName}
                     onChange={this.handleChange}
                 />
             </SettingsGroup>
