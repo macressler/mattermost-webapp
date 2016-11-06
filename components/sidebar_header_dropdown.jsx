@@ -544,7 +544,7 @@ export default class SidebarHeaderDropdown extends React.Component {
                 >
                     <FormattedMessage
                         id='navbar_dropdown.about'
-                        defaultMessage='About Mattermost'
+                        defaultMessage='About uChat'
                     />
                 </a>
             </li>
