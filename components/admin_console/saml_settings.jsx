@@ -268,7 +268,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.publicCertificateFileRemoveDesc'
-                            defaultMessage='Remove the certificate used to generate the signature on a SAML request to the Identity Provider for a service provider initiated SAML login, when Mattermost is the Service Provider.'
+                            defaultMessage='Remove the certificate used to generate the signature on a SAML request to the Identity Provider for a service provider initiated SAML login, when uChat is the Service Provider.'
                         />
                     }
                     removeButtonText={Utils.localizeMessage('admin.saml.remove.sp_certificate', 'Remove Service Provider Certificate')}
@@ -291,7 +291,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.publicCertificateFileDesc'
-                            defaultMessage='The certificate used to generate the signature on a SAML request to the Identity Provider for a service provider initiated SAML login, when Mattermost is the Service Provider.'
+                            defaultMessage='The certificate used to generate the signature on a SAML request to the Identity Provider for a service provider initiated SAML login, when uChat is the Service Provider.'
                         />
                     }
                     uploadingText={Utils.localizeMessage('admin.saml.uploading.certificate', 'Uploading Certificate...')}
@@ -309,7 +309,7 @@ export default class SamlSettings extends AdminSettings {
                     <div className='banner__content'>
                         <FormattedHTMLMessage
                             id='admin.saml.bannerDesc'
-                            defaultMessage='User attributes in SAML server, including user deactivation or removal, are updated in Mattermost during user login. Learn more at: <a href=\"https://docs.mattermost.com/deployment/sso-saml.html\">https://docs.mattermost.com/deployment/sso-saml.html</a>'
+                            defaultMessage='User attributes in SAML server, including user deactivation or removal, are updated in uChat during user login. Learn more at: <a href=\"https://docs.mattermost.com/deployment/sso-saml.html\">https://docs.mattermost.com/deployment/sso-saml.html</a>'
                         />
                     </div>
                 </div>
@@ -324,7 +324,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedHTMLMessage
                             id='admin.saml.enableDescription'
-                            defaultMessage='When true, Mattermost allows login using SAML 2.0. Please see <a href="http://docs.mattermost.com/deployment/sso-saml.html" target="_blank">documentation</a> to learn more about configuring SAML for Mattermost.'
+                            defaultMessage='When true, uChat allows login using SAML 2.0. Please see <a href="http://docs.mattermost.com/deployment/sso-saml.html" target="_blank">documentation</a> to learn more about configuring SAML for uChat.'
                         />
                     }
                     value={this.state.enable}
@@ -342,7 +342,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.idpUrlDesc'
-                            defaultMessage='The URL where Mattermost sends a SAML request to start login sequence.'
+                            defaultMessage='The URL where uChat sends a SAML request to start login sequence.'
                         />
                     }
                     value={this.state.idpUrl}
@@ -380,7 +380,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.verifyDescription'
-                            defaultMessage='When false, Mattermost will not verify that the signature sent from a SAML Response matches the Service Provider Login URL. Not recommended for production environments. For testing only.'
+                            defaultMessage='When false, uChat will not verify that the signature sent from a SAML Response matches the Service Provider Login URL. Not recommended for production environments. For testing only.'
                         />
                     }
                     value={this.state.verify}
@@ -417,7 +417,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.encryptDescription'
-                            defaultMessage='When false, Mattermost will not decrypt SAML Assertions encrypted with your Service Provider Public Certificate. Not recommended for production environments. For testing only.'
+                            defaultMessage='When false, uChat will not decrypt SAML Assertions encrypted with your Service Provider Public Certificate. Not recommended for production environments. For testing only.'
                         />
                     }
                     value={this.state.encrypt}
@@ -438,7 +438,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.emailAttrDesc'
-                            defaultMessage='The attribute in the SAML Assertion that will be used to populate the email addresses of users in Mattermost.'
+                            defaultMessage='The attribute in the SAML Assertion that will be used to populate the email addresses of users in uChat.'
                         />
                     }
                     value={this.state.emailAttribute}
@@ -457,7 +457,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.usernameAttrDesc'
-                            defaultMessage='The attribute in the SAML Assertion that will be used to populate the username field in Mattermost.'
+                            defaultMessage='The attribute in the SAML Assertion that will be used to populate the username field in uChat.'
                         />
                     }
                     value={this.state.usernameAttribute}
@@ -476,7 +476,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.firstnameAttrDesc'
-                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the first name of users in Mattermost.'
+                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the first name of users in uChat.'
                         />
                     }
                     value={this.state.firstNameAttribute}
@@ -495,7 +495,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.lastnameAttrDesc'
-                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the last name of users in Mattermost.'
+                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the last name of users in uChat.'
                         />
                     }
                     value={this.state.lastNameAttribute}
@@ -514,7 +514,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.nicknameAttrDesc'
-                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the nickname of users in Mattermost.'
+                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the nickname of users in uChat.'
                         />
                     }
                     value={this.state.nicknameAttribute}
@@ -533,7 +533,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.positionAttrDesc'
-                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the position of users in Mattermost.'
+                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the position of users in uChat.'
                         />
                     }
                     value={this.state.positionAttribute}
@@ -552,7 +552,7 @@ export default class SamlSettings extends AdminSettings {
                     helpText={
                         <FormattedMessage
                             id='admin.saml.localeAttrDesc'
-                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the language of users in Mattermost.'
+                            defaultMessage='(Optional) The attribute in the SAML Assertion that will be used to populate the language of users in uChat.'
                         />
                     }
                     value={this.state.localeAttribute}
