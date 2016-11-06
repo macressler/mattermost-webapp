@@ -604,7 +604,7 @@ export default class Navbar extends React.Component {
                             trigger='click'
                             placement='bottom'
                             overlay={popoverContent}
-                            className='description'
+                            className='description hidden-xs'
                             rootClose={true}
                         >
                             <div className='pull-right description navbar-right__icon info-popover'>

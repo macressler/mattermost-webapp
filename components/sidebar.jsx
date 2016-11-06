@@ -555,7 +555,10 @@ export default class Sidebar extends React.Component {
 
         let closeButton = null;
         let removeTooltip = (
-            <Tooltip id='remove-dm-tooltip'>
+            <Tooltip
+                className='hidden-xs'
+                id='remove-dm-tooltip'
+            >
                 <FormattedMessage
                     id='sidebar.removeList'
                     defaultMessage='Remove from list'
@@ -595,6 +598,7 @@ export default class Sidebar extends React.Component {
         let tutorialTip = null;
         if (this.state.showTutorialTip && channel.name === Constants.DEFAULT_CHANNEL) {
             tutorialTip = this.createTutorialTip();
+            this.openLeftSidebar();
         }
 
         let link = '';
@@ -722,7 +726,10 @@ export default class Sidebar extends React.Component {
         }
 
         const createChannelTootlip = (
-            <Tooltip id='new-channel-tooltip' >
+            <Tooltip
+                className='hidden-xs'
+                id='new-channel-tooltip'
+            >
                 <FormattedMessage
                     id='sidebar.createChannel'
                     defaultMessage='Create new public channel'
@@ -730,7 +737,10 @@ export default class Sidebar extends React.Component {
             </Tooltip>
         );
         const createGroupTootlip = (
-            <Tooltip id='new-group-tooltip'>
+            <Tooltip
+                className='hidden-xs'
+                id='new-group-tooltip'
+            >
                 <FormattedMessage
                     id='sidebar.createGroup'
                     defaultMessage='Create new private channel'
