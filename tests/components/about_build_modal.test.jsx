@@ -46,6 +46,7 @@ describe('components/AboutBuildModal', () => {
             BuildNumber: '3.6.2',
             SQLDriverName: 'Postgres',
             BuildHash: 'abcdef1234567890',
+            BuildHashEnterprise: '0123456789abcdef',
             BuildDate: '21 January 2017'
         };
 
