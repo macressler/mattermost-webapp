@@ -147,7 +147,12 @@ export default class ChangeUrlModal extends React.Component {
         const fullUrl = TeamStore.getCurrentTeamUrl() + '/channels';
         const shortURL = URL.getShortenedURL(fullUrl);
         const urlTooltip = (
-            <Tooltip id='urlTooltip'>{fullUrl}</Tooltip>
+            <Tooltip
+                className='hidden-xs'
+                id='urlTooltip'
+            >
+                {fullUrl}
+            </Tooltip>
         );
 
         return (
@@ -181,6 +186,7 @@ export default class ChangeUrlModal extends React.Component {
                                 <div className={urlClass}>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
+                                        className='hidden-xs'
                                         delayShow={Constants.OVERLAY_TIME_DELAY}
                                         placement='top'
                                         overlay={urlTooltip}
