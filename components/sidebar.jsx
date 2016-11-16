@@ -600,6 +600,7 @@ export default class Sidebar extends React.Component {
             closeButton = (
                 <OverlayTrigger
                     trigger={['hover', 'focus']}
+                    className='hidden-xs'
                     delayShow={1000}
                     placement='top'
                     overlay={removeTooltip}
@@ -801,6 +802,7 @@ export default class Sidebar extends React.Component {
         let createPublicChannelIcon = (
             <OverlayTrigger
                 trigger={['hover', 'focus']}
+                className='hidden-xs'
                 delayShow={500}
                 placement='top'
                 overlay={createChannelTootlip}
@@ -819,6 +821,7 @@ export default class Sidebar extends React.Component {
         let createPrivateChannelIcon = (
             <OverlayTrigger
                 trigger={['hover', 'focus']}
+                className='hidden-xs'
                 delayShow={500}
                 placement='top'
                 overlay={createGroupTootlip}
