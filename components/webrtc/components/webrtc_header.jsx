@@ -22,7 +22,10 @@ export default function WebrtcHeader(props) {
     );
 
     const closeSidebarTooltip = (
-        <Tooltip id='closeSidebarTooltip'>
+        <Tooltip
+            className='hidden-xs'
+            id='closeSidebarTooltip'
+        >
             <FormattedMessage
                 id='rhs_header.closeTooltip'
                 defaultMessage='Close Sidebar'
@@ -31,7 +34,10 @@ export default function WebrtcHeader(props) {
     );
 
     const expandSidebarTooltip = (
-        <Tooltip id='expandSidebarTooltip'>
+        <Tooltip
+            className='hidden-xs'
+            id='expandSidebarTooltip'
+        >
             <FormattedMessage
                 id='rhs_header.expandTooltip'
                 defaultMessage='Expand Sidebar'
@@ -40,7 +46,10 @@ export default function WebrtcHeader(props) {
     );
 
     const shrinkSidebarTooltip = (
-        <Tooltip id='shrinkSidebarTooltip'>
+        <Tooltip
+            className='hidden-xs'
+            id='shrinkSidebarTooltip'
+        >
             <FormattedMessage
                 id='rhs_header.expandTooltip'
                 defaultMessage='Shrink Sidebar'
@@ -60,6 +69,7 @@ export default function WebrtcHeader(props) {
                 >
                     <OverlayTrigger
                         trigger={['hover', 'focus']}
+                        className='hidden-xs'
                         delayShow={Constants.OVERLAY_TIME_DELAY}
                         placement='top'
                         overlay={expandSidebarTooltip}
@@ -68,6 +78,7 @@ export default function WebrtcHeader(props) {
                     </OverlayTrigger>
                     <OverlayTrigger
                         trigger={['hover', 'focus']}
+                        className='hidden-xs'
                         delayShow={Constants.OVERLAY_TIME_DELAY}
                         placement='top'
                         overlay={shrinkSidebarTooltip}
@@ -80,9 +91,10 @@ export default function WebrtcHeader(props) {
                     className='sidebar--right__close'
                     aria-label='Close'
                     title='Close'
-                    onClick={props.onClose}
+                    onClick={this.props.onClose}
                 >
                     <OverlayTrigger
+                        className='hidden-xs'
                         delayShow={Constants.OVERLAY_TIME_DELAY}
                         placement='top'
                         overlay={closeSidebarTooltip}

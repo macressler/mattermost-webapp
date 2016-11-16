@@ -89,6 +89,7 @@ export default class SidebarHeader extends React.Component {
             const fullName = Utils.getFullName(me);
             teamNameWithToolTip = (
                 <OverlayTrigger
+                    className='hidden-xs'
                     trigger={['hover', 'focus']}
                     delayShow={Constants.OVERLAY_TIME_DELAY}
                     placement='bottom'
