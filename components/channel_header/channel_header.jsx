@@ -202,7 +202,10 @@ export default class ChannelHeader extends React.Component {
 
         const channel = this.props.channel;
         const recentMentionsTooltip = (
-            <Tooltip id='recentMentionsTooltip'>
+            <Tooltip
+                className='hidden-xs'
+                id='recentMentionsTooltip'
+            >
                 <FormattedMessage
                     id='channel_header.recentMentions'
                     defaultMessage='Recent Mentions'
@@ -222,7 +225,7 @@ export default class ChannelHeader extends React.Component {
         const flaggedTooltip = (
             <Tooltip
                 id='flaggedTooltip'
-                className='text-nowrap'
+                className='text-nowrap hidden-xs'
             >
                 <FormattedMessage
                     id='channel_header.flagged'
@@ -709,6 +712,7 @@ export default class ChannelHeader extends React.Component {
 
             headerTextContainer = (
                 <OverlayTrigger
+                    className='hidden-xs'
                     trigger={'click'}
                     placement='bottom'
                     rootClose={true}
@@ -749,7 +753,10 @@ export default class ChannelHeader extends React.Component {
         let toggleFavoriteTooltip;
         if (this.props.isFavorite) {
             toggleFavoriteTooltip = (
-                <Tooltip id='favoriteTooltip'>
+                <Tooltip
+                    id='favoriteTooltip'
+                    className='hidden-xs'
+                >
                     <FormattedMessage
                         id='channelHeader.removeFromFavorites'
                         defaultMessage='Remove from Favorites'
@@ -758,7 +765,10 @@ export default class ChannelHeader extends React.Component {
             );
         } else {
             toggleFavoriteTooltip = (
-                <Tooltip id='favoriteTooltip'>
+                <Tooltip
+                    id='favoriteTooltip'
+                    className='hidden-xs'
+                >
                     <FormattedMessage
                         id='channelHeader.addToFavorites'
                         defaultMessage='Add to Favorites'
@@ -770,6 +780,7 @@ export default class ChannelHeader extends React.Component {
         const toggleFavorite = (
             <OverlayTrigger
                 trigger={['hover', 'focus']}
+                className='hidden-xs'
                 delayShow={Constants.OVERLAY_TIME_DELAY}
                 placement='bottom'
                 overlay={toggleFavoriteTooltip}
@@ -877,6 +888,7 @@ export default class ChannelHeader extends React.Component {
                     <div className='flex-child'>
                         <OverlayTrigger
                             trigger={['hover', 'focus']}
+                            className='hidden-xs'
                             delayShow={Constants.OVERLAY_TIME_DELAY}
                             placement='bottom'
                             overlay={recentMentionsTooltip}
@@ -896,6 +908,7 @@ export default class ChannelHeader extends React.Component {
                     <div className='flex-child'>
                         <OverlayTrigger
                             trigger={['hover', 'focus']}
+                            className='hidden-xs'
                             delayShow={Constants.OVERLAY_TIME_DELAY}
                             placement='bottom'
                             overlay={flaggedTooltip}
