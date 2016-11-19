@@ -171,8 +171,6 @@ export default class Textbox extends React.Component {
     }
 
     render() {
-        const hasText = this.props.value && this.props.value.length > 0;
-
         let editHeader;
         if (this.props.previewMessageLink) {
             editHeader = (
@@ -192,69 +190,23 @@ export default class Textbox extends React.Component {
         let previewLink = null;
         if (Utils.isFeatureEnabled(PreReleaseFeatures.MARKDOWN_PREVIEW)) {
             previewLink = (
-                <a
-                    onClick={this.togglePreview}
-                    className='textbox-preview-link'
-                >
-                    {this.state.preview ? (
-                        editHeader
-                    ) : (
-                        <FormattedMessage
-                            id='textbox.preview'
-                            defaultMessage='Preview'
-                        />
-                    )}
-                </a>
+                <div className='md-preview__text'>
+                    <a
+                        onClick={this.togglePreview}
+                        className='textbox-preview-link'
+                    >
+                        {this.state.preview ? (
+                           editHeader
+                        ) : (
+                            <FormattedMessage
+                                id='textbox.preview'
+                                defaultMessage='Preview'
+                            />
+                        )}
+                    </a>
+                </div>
             );
         }
-
-        const helpText = (
-            <div
-                style={{visibility: hasText ? 'visible' : 'hidden', opacity: hasText ? '0.45' : '0'}}
-                className='help__format-text'
-            >
-                <b>
-                    <FormattedMessage
-                        id='textbox.bold'
-                        defaultMessage='**bold**'
-                    />
-                </b>
-                <i>
-                    <FormattedMessage
-                        id='textbox.italic'
-                        defaultMessage='_italic_'
-                    />
-                </i>
-                <span>
-                    {'~~'}
-                    <strike>
-                        <FormattedMessage
-                            id='textbox.strike'
-                            defaultMessage='strike'
-                        />
-                    </strike>
-                    {'~~ '}
-                </span>
-                <span>
-                    <FormattedMessage
-                        id='textbox.inlinecode'
-                        defaultMessage='`inline code`'
-                    />
-                </span>
-                <span>
-                    <FormattedMessage
-                        id='textbox.preformatted'
-                        defaultMessage='```preformatted```'
-                    />
-                </span>
-                <span>
-                    <FormattedMessage
-                        id='textbox.quote'
-                        defaultMessage='>quote'
-                    />
-                </span>
-            </div>
-        );
 
         let textboxClassName = 'form-control custom-textarea';
         if (this.props.emojiEnabled) {
@@ -297,21 +249,7 @@ export default class Textbox extends React.Component {
                     style={{display: this.state.preview ? 'block' : 'none'}}
                     dangerouslySetInnerHTML={{__html: this.state.preview ? TextFormatting.formatText(this.props.value) : ''}}
                 />
-                <div className='help__text'>
-                    {helpText}
-                    {previewLink}
-                    <a
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        href='/help/messaging'
-                        className='textbox-help-link'
-                    >
-                        <FormattedMessage
-                            id='textbox.help'
-                            defaultMessage='Help'
-                        />
-                    </a>
-                </div>
+                {previewLink}
             </div>
         );
     }
