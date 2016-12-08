@@ -1,7 +1,7 @@
 // Copyright (c) 2017-present Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
-import ProfilePopover from 'components/profile_popover.jsx';
+import ProfilePopover from 'components/profile_popover_new.jsx';
 import Pluggable from 'plugins/pluggable';
 import {Client4} from 'mattermost-redux/client';
 
@@ -87,6 +87,7 @@ export default class AtMention extends React.PureComponent {
                                 hide={this.hideProfilePopover}
                                 isRHS={this.props.isRHS}
                                 hasMention={this.props.hasMention}
+                                parent={this}
                             />
                         </Pluggable>
                     }
