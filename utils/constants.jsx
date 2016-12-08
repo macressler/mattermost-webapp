@@ -197,7 +197,8 @@ export const ActionTypes = keyMirror({
 
     EMOJI_POSTED: null,
 
-    RECEIVED_PLUGIN_COMPONENTS: null
+    RECEIVED_PLUGIN_COMPONENTS: null,
+    POPOVER_MENTION_KEY_CLICK: null
 });
 
 export const WebrtcActionTypes = keyMirror({
