@@ -1,7 +1,7 @@
 // Copyright (c) 2016-present Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
-import ProfilePopover from './profile_popover.jsx';
+import ProfilePopover from './profile_popover_new.jsx';
 import Pluggable from 'plugins/pluggable';
 import * as Utils from 'utils/utils.jsx';
 
@@ -55,7 +55,7 @@ export default class ProfilePicture extends React.Component {
         if (this.props.post) {
             isSystemMessage = PostUtils.isSystemMessage(this.props.post);
         }
-        if (this.props.user) {
+        if (this.props.user && !this.props.disablePopover) {
             return (
                 <OverlayTrigger
                     ref='overlay'
@@ -73,6 +73,7 @@ export default class ProfilePicture extends React.Component {
                                 hide={this.hideProfilePopover}
                                 isRHS={this.props.isRHS}
                                 hasMention={this.props.hasMention}
+                                parent={this}
                             />
                         </Pluggable>
                     }
@@ -106,6 +107,7 @@ export default class ProfilePicture extends React.Component {
 ProfilePicture.defaultProps = {
     width: '36',
     height: '36',
+    disablePopover: false,
     isRHS: false,
     hasMention: false
 };
@@ -116,7 +118,8 @@ ProfilePicture.propTypes = {
     height: PropTypes.string,
     user: PropTypes.object,
     isBusy: PropTypes.bool,
+    post: PropTypes.object,
     isRHS: PropTypes.bool,
     hasMention: PropTypes.bool,
-    post: PropTypes.object
+    disablePopover: React.PropTypes.bool
 };
