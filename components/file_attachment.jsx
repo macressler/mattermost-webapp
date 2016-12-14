@@ -11,7 +11,8 @@ import * as Utils from 'utils/utils.jsx';
 
 import {getFileUrl, getFileThumbnailUrl} from 'mattermost-redux/utils/file_utils';
 
-import downloadIcon from 'images/download_CTA.svg';
+import removeCTA from 'images/delete_CTA.svg';
+import downloadCTA from 'images/download_CTA.svg';
 
 export default class FileAttachment extends React.Component {
     constructor(props) {
@@ -19,6 +20,7 @@ export default class FileAttachment extends React.Component {
 
         this.loadFiles = this.loadFiles.bind(this);
         this.onAttachmentClick = this.onAttachmentClick.bind(this);
+        this.onRemoveClick = this.onRemoveClick.bind(this);
 
         this.state = {
             loaded: Utils.getFileType(props.fileInfo.extension) !== 'image'
@@ -47,8 +49,13 @@ export default class FileAttachment extends React.Component {
         const fileInfo = this.props.fileInfo;
         const fileType = Utils.getFileType(fileInfo.extension);
 
-        if (fileType === 'image') {
-            const thumbnailUrl = getFileThumbnailUrl(fileInfo.id);
+        if (fileType === 'image' || fileType === 'svg') {
+            let thumbnailUrl;
+            if (this.props.displayType === 'preview') {
+                thumbnailUrl = getFileUrl(fileInfo.id);
+            } else {
+                thumbnailUrl = getFileThumbnailUrl(fileInfo.id);
+            }
 
             Utils.loadImage(thumbnailUrl, this.handleImageLoaded);
         }
@@ -62,7 +69,16 @@ export default class FileAttachment extends React.Component {
 
     onAttachmentClick(e) {
         e.preventDefault();
-        this.props.handleImageClick(this.props.index);
+        if (this.props.displayType !== 'preview') {
+            this.props.handleImageClick(this.props.index);
+        }
+    }
+
+    onRemoveClick(e) {
+        e.preventDefault();
+        if (this.props.handleRemoveClick) {
+            this.props.handleRemoveClick();
+        }
     }
 
     render() {
@@ -74,7 +90,25 @@ export default class FileAttachment extends React.Component {
 
         let thumbnail;
         if (this.state.loaded) {
-            thumbnail = <div className={'file-icon ' + Utils.getIconClassName(type)}/>;
+            if (type === 'image' || type === 'svg') {
+                let thumbnailUrl;
+                if (this.props.displayType === 'preview') {
+                    thumbnailUrl = getFileUrl(fileInfo.id);
+                } else {
+                    thumbnailUrl = getFileThumbnailUrl(fileInfo.id);
+                }
+
+                thumbnail = (
+                    <div
+                        className='post-image'
+                        style={{
+                            backgroundImage: `url(${thumbnailUrl})`
+                        }}
+                    />
+                );
+            } else {
+                thumbnail = <div className={'file-icon ' + Utils.getIconClassName(type)}/>;
+            }
         } else {
             thumbnail = <div className='post-image__load'/>;
         }
@@ -115,6 +149,29 @@ export default class FileAttachment extends React.Component {
                             className='icon'
                             dangerouslySetInnerHTML={{__html: Constants.ATTACHMENT_ICON_SVG}}
                         />
+                        {trimmedFilename}
+                    </a>
+                </OverlayTrigger>
+            );
+        } else if (this.props.displayType === 'preview') {
+            filenameOverlay = (
+                <OverlayTrigger
+                    className='hidden-xs'
+                    delayShow={1000}
+                    placement='top'
+                    overlay={(
+                        <Tooltip
+                            id='file-name__tooltip'
+                            className='hidden-xs'
+                        >
+                            {fileName}
+                        </Tooltip>
+                    )}
+                >
+                    <a
+                        href='#'
+                        className='post-image__name'
+                    >
                         {trimmedFilename}
                     </a>
                 </OverlayTrigger>
@@ -169,8 +226,33 @@ export default class FileAttachment extends React.Component {
             );
         }
 
+        let fileCTA;
+        if (this.props.displayType === 'preview') {
+            fileCTA = (
+                <a
+                    href='#'
+                    className='post-image__download'
+                    onClick={this.onRemoveClick}
+                >
+                    <img src={removeCTA}/>
+                </a>
+            );
+        } else {
+            fileCTA = (
+                <a
+                    href={fileUrl}
+                    download={fileName}
+                    className='post-image__download'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    <img src={downloadCTA}/>
+                </a>
+            );
+        }
+
         let fileAttachment;
-        if (type === 'image' && !this.props.compactDisplay) {
+        if ((type === 'image' || type === 'svg') && !this.props.compactDisplay && this.props.displayType !== 'preview') {
             fileAttachment = (
                 <div className='post-image__preview'>
                     <a
@@ -190,7 +272,7 @@ export default class FileAttachment extends React.Component {
                             target='_blank'
                             rel='noopener noreferrer'
                         >
-                            <img src={downloadIcon}/>
+                            <img src={downloadCTA}/>
                             {filenameOverlay}
                             <span className='post-image__size'>{Utils.fileSizeToString(fileInfo.size)}</span>
                         </a>
@@ -199,7 +281,9 @@ export default class FileAttachment extends React.Component {
             );
         } else {
             fileAttachment = (
-                <div className='post-image__column'>
+                <div
+                    className={this.props.displayType === 'preview' ? 'post-image__column preview' : 'post-image__column'}
+                >
                     <a
                         className='post-image__thumbnail'
                         href='#'
@@ -209,20 +293,17 @@ export default class FileAttachment extends React.Component {
                     </a>
                     <div className='post-image__details'>
                         {filenameOverlay}
-                        <div>
+                        <div className='post-image__info'>
                             {downloadButton}
                             <span className='post-image__type'>{fileInfo.extension.toUpperCase()}</span>
                             <span className='post-image__size'>{Utils.fileSizeToString(fileInfo.size)}</span>
                         </div>
+                        <div>{fileCTA}</div>
                     </div>
                 </div>
             );
         }
-        return (
-            <div>
-                {fileAttachment}
-            </div>
-        );
+        return fileAttachment;
     }
 }
 
@@ -234,6 +315,13 @@ FileAttachment.propTypes = {
 
     // handler for when the thumbnail is clicked passed the index above
     handleImageClick: PropTypes.func,
+
+    handleRemoveClick: PropTypes.func,
+
+    // available values:
+    // (default) inline: the inline display for files uploaded
+    // preview: the preview display under the text input field
+    displayType: PropTypes.string,
 
     compactDisplay: PropTypes.bool
 };
