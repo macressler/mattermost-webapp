@@ -33,7 +33,9 @@ describe('components/AboutBuildModal', () => {
         const wrapper = shallow(
             <AboutBuildModal
                 show={true}
-                onModalDismissed={null}
+                onModalDismissed={() => {
+                    console.log('dismissed');
+                }}
             />
         );
         expect(wrapper).toMatchSnapshot();
@@ -55,7 +57,9 @@ describe('components/AboutBuildModal', () => {
         const wrapper = shallow(
             <AboutBuildModal
                 show={true}
-                onModalDismissed={null}
+                onModalDismissed={() => {
+                    console.log('dismissed');
+                }}
             />
         );
         expect(wrapper).toMatchSnapshot();
@@ -76,7 +80,9 @@ describe('components/AboutBuildModal', () => {
         const wrapper = shallow(
             <AboutBuildModal
                 show={true}
-                onModalDismissed={null}
+                onModalDismissed={() => {
+                    console.log('dismissed');
+                }}
             />
         );
         expect(wrapper.find('#versionString').text()).toBe(' 3.6.0');
@@ -97,7 +103,9 @@ describe('components/AboutBuildModal', () => {
         const wrapper = shallow(
             <AboutBuildModal
                 show={true}
-                onModalDismissed={null}
+                onModalDismissed={() => {
+                    console.log('dismissed');
+                }}
             />
         );
         expect(wrapper.find('#versionString').text()).toBe(' 3.6.0\u00a0 (3.6.2)');
