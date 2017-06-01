@@ -65,7 +65,7 @@ exports[`components/rename_channel_modal/rename_channel_modal.jsx should match s
         <input
           className="form-control"
           id="display_name"
-          maxLength={22}
+          maxLength={64}
           onChange={[Function]}
           placeholder="Enter display name"
           type="text"
@@ -112,7 +112,7 @@ exports[`components/rename_channel_modal/rename_channel_modal.jsx should match s
           <input
             className="form-control"
             id="channel_name"
-            maxLength={22}
+            maxLength={64}
             onChange={[Function]}
             placeholder="lowercase alphanumeric characters"
             readOnly={false}

@@ -23,6 +23,8 @@ describe('components/AboutBuildModal', () => {
         };
     }
 
+    global.window.mm_config = {CustomOverride: true};
+
     afterEach(() => {
         config = null;
         license = null;
