@@ -9,7 +9,6 @@ import UserStore from 'stores/user_store.jsx';
 
 import Constants from 'utils/constants.jsx';
 const PreReleaseFeatures = Constants.PRE_RELEASE_FEATURES;
-import * as Utils from 'utils/utils.jsx';
 
 import {savePreferences} from 'actions/user_actions.jsx';
 
@@ -25,8 +24,8 @@ export default class AdvancedSettingsDisplay extends React.Component {
         this.updateSection = this.updateSection.bind(this);
         this.updateSetting = this.updateSetting.bind(this);
         this.toggleFeature = this.toggleFeature.bind(this);
-        this.saveEnabledFeatures = this.saveEnabledFeatures.bind(this);
 
+        // this.saveEnabledFeatures = this.saveEnabledFeatures.bind(this);
         this.renderFormattingSection = this.renderFormattingSection.bind(this);
         this.renderJoinLeaveSection = this.renderJoinLeaveSection.bind(this);
 
@@ -107,6 +106,7 @@ export default class AdvancedSettingsDisplay extends React.Component {
         this.setState({settings, enabledFeatures});
     }
 
+    /*
     saveEnabledFeatures() {
         const features = [];
         Object.keys(this.state.settings).forEach((setting) => {
@@ -117,6 +117,7 @@ export default class AdvancedSettingsDisplay extends React.Component {
 
         this.handleSubmit(features);
     }
+    */
 
     handleSubmit(settings) {
         const preferences = [];
@@ -448,6 +449,7 @@ export default class AdvancedSettingsDisplay extends React.Component {
             displayJoinLeaveSectionDivider = <div className='divider-light'/>;
         }
 
+        /*
         let previewFeaturesSection;
         let previewFeaturesSectionDivider;
         if (this.state.preReleaseFeaturesKeys.length > 0) {
@@ -521,6 +523,7 @@ export default class AdvancedSettingsDisplay extends React.Component {
                 );
             }
         }
+        */
 
         return (
             <div>
@@ -564,8 +567,6 @@ export default class AdvancedSettingsDisplay extends React.Component {
                     {formattingSection}
                     {displayJoinLeaveSectionDivider}
                     {displayJoinLeaveSection}
-                    {previewFeaturesSectionDivider}
-                    {previewFeaturesSection}
                     <div className='divider-dark'/>
                 </div>
             </div>
