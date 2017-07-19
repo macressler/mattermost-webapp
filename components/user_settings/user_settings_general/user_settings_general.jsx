@@ -56,10 +56,13 @@ const holders = defineMessages({
         id: 'user.settings.general.fullName',
         defaultMessage: 'Full Name'
     },
+
+    /*
     nickname: {
         id: 'user.settings.general.nickname',
         defaultMessage: 'Nickname'
     },
+    */
     username: {
         id: 'user.settings.general.username',
         defaultMessage: 'Username'
@@ -101,7 +104,8 @@ class UserSettingsGeneralTab extends React.Component {
         this.submitActive = false;
 
         this.submitUsername = this.submitUsername.bind(this);
-        this.submitNickname = this.submitNickname.bind(this);
+
+        // this.submitNickname = this.submitNickname.bind(this);
         this.submitName = this.submitName.bind(this);
         this.submitEmail = this.submitEmail.bind(this);
         this.submitUser = this.submitUser.bind(this);
@@ -111,7 +115,8 @@ class UserSettingsGeneralTab extends React.Component {
         this.updateUsername = this.updateUsername.bind(this);
         this.updateFirstName = this.updateFirstName.bind(this);
         this.updateLastName = this.updateLastName.bind(this);
-        this.updateNickname = this.updateNickname.bind(this);
+
+        // this.updateNickname = this.updateNickname.bind(this);
         this.updateEmail = this.updateEmail.bind(this);
         this.updateConfirmEmail = this.updateConfirmEmail.bind(this);
         this.updatePicture = this.updatePicture.bind(this);
@@ -149,6 +154,7 @@ class UserSettingsGeneralTab extends React.Component {
         this.submitUser(user, Constants.UserUpdateEvents.USERNAME, false);
     }
 
+    /*
     submitNickname(e) {
         e.preventDefault();
 
@@ -166,6 +172,7 @@ class UserSettingsGeneralTab extends React.Component {
 
         this.submitUser(user, Constants.UserUpdateEvents.NICKNAME, false);
     }
+    */
 
     submitName(e) {
         e.preventDefault();
@@ -311,9 +318,11 @@ class UserSettingsGeneralTab extends React.Component {
         this.setState({lastName: e.target.value});
     }
 
+    /*
     updateNickname(e) {
         this.setState({nickname: e.target.value});
     }
+    */
 
     updatePosition(e) {
         this.setState({position: e.target.value});
@@ -352,7 +361,8 @@ class UserSettingsGeneralTab extends React.Component {
             username: user.username,
             firstName: user.first_name,
             lastName: user.last_name,
-            nickname: user.nickname,
+
+            // nickname: user.nickname,
             position: user.position,
             originalEmail: user.email,
             email: '',
@@ -845,6 +855,7 @@ class UserSettingsGeneralTab extends React.Component {
             );
         }
 
+        /*
         let nicknameSection;
         if (this.props.activeSection === 'nickname') {
             let extraInfo;
@@ -946,6 +957,7 @@ class UserSettingsGeneralTab extends React.Component {
                 />
             );
         }
+        */
 
         let usernameSection;
         if (this.props.activeSection === 'username') {
@@ -1226,8 +1238,6 @@ class UserSettingsGeneralTab extends React.Component {
                     {nameSection}
                     <div className='divider-light'/>
                     {usernameSection}
-                    <div className='divider-light'/>
-                    {nicknameSection}
                     <div className='divider-light'/>
                     {positionSection}
                     <div className='divider-light'/>
