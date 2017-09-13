@@ -253,6 +253,11 @@ export default class FileAttachment extends React.Component {
 
         let fileAttachment;
         if ((type === 'image' || type === 'svg') && !this.props.compactDisplay && this.props.displayType !== 'preview') {
+            let thumbnailUrl = getFileThumbnailUrl(fileInfo.id);
+            if (Utils.isGIFImage(fileInfo.extension)) {
+                thumbnailUrl = getFileUrl(fileInfo.id);
+            }
+
             fileAttachment = (
                 <div className='post-image__preview'>
                     <a
@@ -261,7 +266,7 @@ export default class FileAttachment extends React.Component {
                     >
                         <img
                             className='post-image__image'
-                            src={getFileThumbnailUrl(fileInfo.id)}
+                            src={thumbnailUrl}
                         />
                     </a>
                     <div className='post-image__info'>
