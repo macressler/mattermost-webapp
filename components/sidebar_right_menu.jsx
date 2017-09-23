@@ -282,24 +282,27 @@ export default class SidebarRightMenu extends React.Component {
             </li>
         );
 
-        const leaveTeam = (
-            <li key='leaveTeam_li'>
-                <a
-                    id='leaveTeam'
-                    href='#'
-                    onClick={GlobalActions.showLeaveTeamModal}
-                >
-                    <span
-                        className='icon'
-                        dangerouslySetInnerHTML={{__html: Constants.LEAVE_TEAM_SVG}}
-                    />
-                    <FormattedMessage
-                        id='navbar_dropdown.leave'
-                        defaultMessage='Leave Team'
-                    />
-                </a>
-            </li>
-        );
+        let leaveTeam = '';
+        if (!global.mm_config.DefaultTeamName) {
+            leaveTeam = (
+                <li key='leaveTeam_li'>
+                    <a
+                        id='leaveTeam'
+                        href='#'
+                        onClick={GlobalActions.showLeaveTeamModal}
+                    >
+                        <span
+                            className='icon'
+                            dangerouslySetInnerHTML={{__html: Constants.LEAVE_TEAM_SVG}}
+                        />
+                        <FormattedMessage
+                            id='navbar_dropdown.leave'
+                            defaultMessage='Leave Team'
+                        />
+                    </a>
+                </li>
+            );
+        }
 
         if (isAdmin) {
             teamSettingsLink = (
