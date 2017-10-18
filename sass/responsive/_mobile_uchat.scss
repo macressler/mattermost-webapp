@@ -40,8 +40,6 @@
     }
 
     .post-create__container {
-        padding-bottom: 10px;
-
         .post-create-footer {
             padding: 0 10px;
         }
@@ -69,7 +67,7 @@
             display: none;
         }
 
-        .icon--emoji-picker {
+        .emoji-picker__container {
             display: none;
         }
     }
@@ -91,19 +89,6 @@
                 width: 100%;
             }
         }
-        .filter-row {
-            margin: 5px 0;
-            .filter-text {
-                padding: 0 0 0 15px;
-            }
-
-            .filter-button {
-                padding: 0 15px 0 0;
-                .btn {
-                    text-align: center;
-                }
-            }
-        }
     }
 
     .settings-modal {
@@ -116,7 +101,7 @@
         @include single-transition(all, .35s, ease);
         @include translate3d(0, 100%, 0);
         @include box-shadow(none);
-        background: alpha-color($black, .8);
+        background: alpha-color($black, .9);
         border: none;
         height: calc(100% - 50px);
         max-width: 100%;
@@ -256,20 +241,9 @@
         }
     }
 
-    .member-select__container {
-        margin-bottom: 5px;
-        margin-top: 5px;
-        overflow: hidden;
-        position: relative;
-        right: 10px;
-        top: 0;
-        width: 100%;
-    }
-
     .user-popover {
         cursor: pointer;
         display: inline-block;
-        pointer-events: none;
     }
 
     .signup-team__container {
@@ -378,8 +352,6 @@
             }
 
             .col__name {
-                pointer-events: none;
-
                 .user-popover {
                     max-width: 130px;
                 }
@@ -512,13 +484,6 @@
     .post-image__column {
         height: 95px;
         width: 200px;
-    }
-
-    .textarea-wrapper {
-        .textbox-preview-link,
-        .textbox-help-link {
-            display: none;
-        }
     }
 
     .form-control {
@@ -728,11 +693,6 @@
                 }
             }
 
-            .modal-footer {
-                padding: 5px;
-                background: whitesmoke;
-            }
-
             .settings-modal {
                 .modal-body {
                     min-height: 100%;
@@ -847,10 +807,6 @@
                     .settings-content {
                         .section-edit {
                             text-align: left;
-                            padding-right: 0;
-                            position: absolute;
-                            right: 15px;
-                            top: 14px;
 
                             .fa {
                                 display: inline-block;
@@ -890,33 +846,11 @@
     }
 
     .file-preview__container {
-        margin: 5px 0 0;
+        margin: 10px 0 5px;
     }
 
     .file-preview {
         margin-top: 0;
-    }
-
-    .file-preview__remove {
-        @include alpha-property(background, $black, .5);
-        height: 28px;
-        left: auto;
-        right: 0;
-        text-align: center;
-        top: 0;
-        width: 28px;
-
-        &:after {
-            display: none;
-        }
-
-        i {
-            font-size: 16px;
-            line-height: 29px;
-            position: relative;
-            right: auto;
-            top: auto;
-        }
     }
 
     // Since system console is not responsive we're overriding bootstrap styles for it
@@ -1082,10 +1016,6 @@
         }
     }
 
-    .search__clear {
-        display: block;
-    }
-
     .search-bar__container {
         @include flex(0 0 50px);
         background: $primary-color;
@@ -1095,22 +1025,6 @@
         .search-form__container {
             color: $black;
             padding: 0;
-        }
-
-        &.focused {
-            .sidebar__collapse {
-                @include translateX(-45px);
-            }
-
-            .search__form {
-                @include translateX(-45px);
-                padding-left: 55px;
-                padding-right: 24px;
-            }
-
-            .search__clear {
-                @include translateX(0);
-            }
         }
 
         .search__form {
@@ -1323,11 +1237,6 @@
         .sidebar-collapse__container {
             display: table-cell;
             vertical-align: top;
-        }
-
-        .sidebar__collapse,
-        .sidebar__search-icon {
-            display: block;
         }
 
         .sidebar__search-clear {
@@ -1701,12 +1610,6 @@
         }
     }
 
-    .filtered-user-list {
-        .filter-controls {
-          padding: 0 1.5em;
-        }
-    }
-
     .member-select__container {
         left: 15px;
         top: 60px;
@@ -1747,26 +1650,12 @@
             }
         }
     }
-    .filtered-user-list {
-        .filter-controls {
-          padding: 0 1.5em;
-        }
-    }
 
     .sidebar--right {
         .post {
             &.post--compact {
                 .post__header {
                     height: auto;
-                }
-            }
-
-            .post__header {
-                padding-right: 50px;
-                .col__name {
-                    .user-popover {
-                        max-width: 100%;
-                    }
                 }
             }
         }
@@ -1794,38 +1683,7 @@
     }
 
     .app__body {
-        .more-modal {
-            .modal-body {
-                padding-bottom: 5px;
-            }
-
-            .more-modal__list {
-                max-height: calc(100vh - 200px);
-            }
-            &.more-direct-channels {
-                .more-modal__list {
-                    max-height: calc(100vh - 200px);
-                }
-            }
-
-            &.list-members, &.no-team-filter, &.no-new-channel-btn {
-                .more-modal__list {
-                    max-height: calc(100vh - 155px);
-                }
-            }
-        }
-
         .modal {
-            &.more-channel__modal {
-                .more-modal__list {
-                    max-height: calc(100vh - 250px);
-                }
-
-                .modal-body {
-                    padding-bottom: 35px;
-                }
-            }
-
             .settings-modal {
                 &.display--content {
                     .modal-body {
@@ -1900,12 +1758,6 @@
                     max-width: 120px;
                 }
             }
-        }
-    }
-
-    .post-image__preview {
-        .post-image__image {
-            max-width: 100%;
         }
     }
 }
