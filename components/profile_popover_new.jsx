@@ -213,8 +213,8 @@ export default class ProfilePopoverNew extends React.Component {
         if (showEmail) {
             dataContentIcons.push(
                 <div
-                    key='popover-email-icon'
                     data-toggle='tooltip'
+                    key='user-popover-dm'
                     title={email}
                     className='pull-left profile-popover-icon'
                 >
