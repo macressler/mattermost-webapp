@@ -1,6 +1,12 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
+import {intlShape, injectIntl, defineMessages, FormattedMessage, FormattedHTMLMessage, FormattedDate} from 'react-intl';
+
+import PropTypes from 'prop-types';
+
+import React from 'react';
+
 import SettingItemMin from 'components/setting_item_min.jsx';
 import SettingItemMax from 'components/setting_item_max.jsx';
 import SettingPicture from 'components/setting_picture.jsx';
@@ -11,7 +17,6 @@ import ErrorStore from 'stores/error_store.jsx';
 import Constants from 'utils/constants.jsx';
 import * as Utils from 'utils/utils.jsx';
 
-import {intlShape, injectIntl, defineMessages, FormattedMessage, FormattedHTMLMessage, FormattedDate} from 'react-intl';
 import {updateUser, uploadProfileImage} from 'actions/user_actions.jsx';
 import {trackEvent} from 'actions/diagnostics_actions.jsx';
 
@@ -73,10 +78,6 @@ const holders = defineMessages({
         defaultMessage: 'Position'
     }
 });
-
-import PropTypes from 'prop-types';
-
-import React from 'react';
 
 class UserSettingsGeneralTabNew extends React.Component {
     static propTypes = {
