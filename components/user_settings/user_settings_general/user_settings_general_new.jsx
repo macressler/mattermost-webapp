@@ -1,24 +1,21 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See License.txt for license information.
 
-import {intlShape, injectIntl, defineMessages, FormattedMessage, FormattedHTMLMessage, FormattedDate} from 'react-intl';
-
 import PropTypes from 'prop-types';
-
 import React from 'react';
+import {defineMessages, FormattedDate, FormattedHTMLMessage, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 
-import SettingItemMin from 'components/setting_item_min.jsx';
-import SettingItemMax from 'components/setting_item_max.jsx';
-import SettingPicture from 'components/setting_picture.jsx';
-
-import UserStore from 'stores/user_store.jsx';
+import {trackEvent} from 'actions/diagnostics_actions.jsx';
+import {updateUser, uploadProfileImage} from 'actions/user_actions.jsx';
 import ErrorStore from 'stores/error_store.jsx';
+import UserStore from 'stores/user_store.jsx';
 
 import Constants from 'utils/constants.jsx';
 import * as Utils from 'utils/utils.jsx';
 
-import {updateUser, uploadProfileImage} from 'actions/user_actions.jsx';
-import {trackEvent} from 'actions/diagnostics_actions.jsx';
+import SettingItemMax from 'components/setting_item_max.jsx';
+import SettingItemMin from 'components/setting_item_min.jsx';
+import SettingPicture from 'components/setting_picture.jsx';
 
 const holders = defineMessages({
     usernameReserved: {
@@ -197,6 +194,8 @@ class UserSettingsGeneralTabNew extends React.Component {
     }
 
     submitUser(user, type, emailUpdated) {
+        this.setState({sectionIsSaving: true});
+
         updateUser(user, type,
             () => {
                 this.updateSection('');
@@ -216,7 +215,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                 } else {
                     serverError = err;
                 }
-                this.setState({serverError, emailError: '', clientError: ''});
+                this.setState({serverError, emailError: '', clientError: '', sectionIsSaving: false});
             }
         );
     }
@@ -327,7 +326,7 @@ class UserSettingsGeneralTabNew extends React.Component {
 
     updateSection(section) {
         const emailChangeInProgress = this.state.emailChangeInProgress;
-        this.setState(Object.assign({}, this.setupInitialState(this.props), {emailChangeInProgress, clientError: '', serverError: '', emailError: ''}));
+        this.setState(Object.assign({}, this.setupInitialState(this.props), {emailChangeInProgress, clientError: '', serverError: '', emailError: '', sectionIsSaving: false}));
         this.submitActive = false;
         this.props.updateSection(section);
     }
@@ -346,7 +345,8 @@ class UserSettingsGeneralTabNew extends React.Component {
             pictureFile: null,
             loadingPicture: false,
             emailChangeInProgress: false,
-            maxFileSize: global.window.mm_config.MaxFileSize
+            maxFileSize: global.window.mm_config.MaxFileSize,
+            sectionIsSaving: false
         };
     }
 
@@ -565,6 +565,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                     }
                     inputs={inputs}
                     submit={submit}
+                    saving={this.state.sectionIsSaving}
                     server_error={this.state.serverError}
                     client_error={this.state.emailError}
                     updateSection={(e) => {
@@ -790,6 +791,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                     title={formatMessage(holders.fullName)}
                     inputs={inputs}
                     submit={submit}
+                    saving={this.state.sectionIsSaving}
                     server_error={serverError}
                     client_error={clientError}
                     updateSection={(e) => {
@@ -897,6 +899,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                     title={formatMessage(holders.username)}
                     inputs={inputs}
                     submit={submit}
+                    saving={this.state.sectionIsSaving}
                     server_error={serverError}
                     client_error={clientError}
                     updateSection={(e) => {
@@ -979,6 +982,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                     title={formatMessage(holders.position)}
                     inputs={inputs}
                     submit={submit}
+                    saving={this.state.sectionIsSaving}
                     server_error={serverError}
                     client_error={clientError}
                     updateSection={(e) => {
