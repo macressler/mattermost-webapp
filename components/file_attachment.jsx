@@ -3,9 +3,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 import {getFileThumbnailUrl, getFileUrl} from 'mattermost-redux/utils/file_utils';
+
+import FilenameOverlay from 'components/file_attachment/filename_overlay.jsx';
 
 import Constants from 'utils/constants.jsx';
 import * as FileUtils from 'utils/file_utils';
@@ -133,64 +134,7 @@ export default class FileAttachment extends React.PureComponent {
             thumbnail = <div className='post-image__load'/>;
         }
 
-        let trimmedFilename;
-        if (fileName.length > 35) {
-            trimmedFilename = fileName.substring(0, Math.min(35, fileName.length)) + '...';
-        } else {
-            trimmedFilename = fileName;
-        }
-
         const canDownloadFiles = FileUtils.canDownloadFiles();
-
-        let filenameOverlay;
-        if (this.props.compactDisplay) {
-            filenameOverlay = (
-                <OverlayTrigger
-                    trigger={['hover', 'focus']}
-                    delayShow={1000}
-                    placement='top'
-                    overlay={<Tooltip id='file-name__tooltip'>{fileName}</Tooltip>}
-                >
-                    <a
-                        href='#'
-                        onClick={this.onAttachmentClick}
-                        className='post-image__name'
-                        rel='noopener noreferrer'
-                    >
-                        <span
-                            className='icon'
-                            dangerouslySetInnerHTML={{__html: Constants.ATTACHMENT_ICON_SVG}}
-                        />
-                        {trimmedFilename}
-                    </a>
-                </OverlayTrigger>
-            );
-        } else if (canDownloadFiles) {
-            filenameOverlay = (
-                <OverlayTrigger
-                    trigger={['hover', 'focus']}
-                    delayShow={1000}
-                    placement='top'
-                    overlay={<Tooltip id='file-name__tooltip'>{Utils.localizeMessage('file_attachment.download', 'Download') + ' "' + fileName + '"'}</Tooltip>}
-                >
-                    <a
-                        href={fileUrl}
-                        download={fileName}
-                        className='post-image__name'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
-                        {trimmedFilename}
-                    </a>
-                </OverlayTrigger>
-            );
-        } else {
-            filenameOverlay = (
-                <span className='post-image__name'>
-                    {trimmedFilename}
-                </span>
-            );
-        }
 
         let downloadButton = null;
         if (canDownloadFiles) {
@@ -217,7 +161,13 @@ export default class FileAttachment extends React.PureComponent {
                     {thumbnail}
                 </a>
                 <div className='post-image__details'>
-                    {filenameOverlay}
+                    <FilenameOverlay
+                        fileInfo={this.props.fileInfo}
+                        index={this.props.index}
+                        handleImageClick={this.props.handleImageClick}
+                        compactDisplay={this.props.compactDisplay}
+                        canDownload={canDownloadFiles}
+                    />
                     <div>
                         {downloadButton}
                         <span className='post-image__type'>{fileInfo.extension.toUpperCase()}</span>
