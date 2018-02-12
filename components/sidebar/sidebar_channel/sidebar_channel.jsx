@@ -121,6 +121,16 @@ export default class SidebarChannel extends React.PureComponent {
          */
         membersCount: PropTypes.number.isRequired,
 
+        /**
+         * Flag if channel is favorite
+         */
+        isFavorite: PropTypes.bool.isRequired,
+
+        /**
+         * Flag if TownSquare should be read only
+         */
+        isTownSquareReadOnly: PropTypes.bool.isRequired,
+
         actions: PropTypes.shape({
             savePreferences: PropTypes.func.isRequired,
             leaveChannel: PropTypes.func.isRequired
@@ -188,6 +198,12 @@ export default class SidebarChannel extends React.PureComponent {
 
         let closeHandler = null;
         if (!this.showChannelAsUnread()) {
+            if (this.props.channelName === Constants.DEFAULT_CHANNEL &&
+                this.props.isTownSquareReadOnly &&
+                !this.props.active && !this.props.isFavorite
+            ) {
+                return '';
+            }
             if (this.props.channelType === Constants.DM_CHANNEL || this.props.channelType === Constants.GM_CHANNEL) {
                 closeHandler = this.handleLeaveDirectChannel;
             } else if (this.props.config.EnableXToLeaveChannelsFromLHS === 'true') {

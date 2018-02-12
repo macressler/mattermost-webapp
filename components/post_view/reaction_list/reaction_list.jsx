@@ -32,6 +32,17 @@ export default class ReactionListView extends React.PureComponent {
          * The emojis for the different reactions
          */
         emojis: PropTypes.object.isRequired,
+
+        /**
+         * Whether to show the emoji picker.
+         */
+        enableEmojiPicker: PropTypes.bool.isRequired,
+
+        /**
+         * Set not to allow edits on post
+         */
+        isReadOnly: PropTypes.bool,
+
         actions: PropTypes.shape({
 
             /**
@@ -44,6 +55,10 @@ export default class ReactionListView extends React.PureComponent {
              */
             addReaction: PropTypes.func.isRequired
         })
+    }
+
+    static defaultProps = {
+        isReadOnly: false
     }
 
     constructor(props) {
@@ -129,7 +144,7 @@ export default class ReactionListView extends React.PureComponent {
         }
 
         let emojiPicker = null;
-        if (window.mm_config.EnableEmojiPicker === 'true') {
+        if (!this.props.isReadOnly && this.props.enableEmojiPicker) {
             const addReactionTooltip = (
                 <Tooltip id='addReactionTooltip'>
                     <FormattedMessage

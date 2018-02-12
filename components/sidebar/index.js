@@ -58,6 +58,8 @@ function mapStateToProps(state) {
         directAndGroupChannelIds = getSortedDirectChannelWithUnreadsIds(state);
     }
 
+    const isSystemAdmin = isCurrentUserSystemAdmin(state);
+
     return {
         config,
         showUnreadSection,
@@ -71,8 +73,9 @@ function mapStateToProps(state) {
         currentTeam: getCurrentTeam(state),
         currentUser: getCurrentUser(state),
         unreads: getUnreads(state),
-        isSystemAdmin: isCurrentUserSystemAdmin(state),
-        isTeamAdmin: isCurrentUserCurrentTeamAdmin(state)
+        isSystemAdmin,
+        isTeamAdmin: isCurrentUserCurrentTeamAdmin(state),
+        isTownSquareReadOnly: !isSystemAdmin && config.ExperimentalTownSquareIsReadOnly === 'true'
     };
 }
 
