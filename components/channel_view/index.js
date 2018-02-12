@@ -3,11 +3,15 @@
 
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
-import {get} from 'mattermost-redux/selectors/entities/preferences';
+import {get as getPreference} from 'mattermost-redux/selectors/entities/preferences';
+import {getCurrentUserId} from 'mattermost-redux/selectors/entities/users';
+import {getCurrentChannel} from 'mattermost-redux/selectors/entities/channels';
+import {getConfig} from 'mattermost-redux/selectors/entities/general';
 import {withRouter} from 'react-router-dom';
 
 import {getDirectTeammate} from 'utils/utils.jsx';
-import {TutorialSteps, Preferences} from 'utils/constants.jsx';
+import UserStore from 'stores/user_store.jsx';
+import Constants, {TutorialSteps, Preferences} from 'utils/constants.jsx';
 
 import ChannelView from './channel_view.jsx';
 
@@ -23,11 +27,19 @@ const getDeactivatedChannel = createSelector(
 
 function mapStateToProps(state) {
     const channelId = state.entities.channels.currentChannelId;
+    const config = getConfig(state);
+    const enableTutorial = config.EnableTutorial === 'true';
+    const tutorialStep = parseInt(getPreference(state, Preferences.TUTORIAL_STEP, getCurrentUserId(state), TutorialSteps.FINISHED), 10);
+    const channel = getCurrentChannel(state);
+    const isReadOnly = channel && channel.name === Constants.DEFAULT_CHANNEL &&
+        !UserStore.isSystemAdminForCurrentUser() &&
+        config.ExperimentalTownSquareIsReadOnly === 'true';
 
     return {
         channelId,
         deactivatedChannel: getDeactivatedChannel(state, channelId),
-        showTutorial: Number(get(state, Preferences.TUTORIAL_STEP, state.entities.users.currentUserId, 999)) <= TutorialSteps.INTRO_SCREENS && global.window.mm_config.EnableTutorial === 'true'
+        showTutorial: enableTutorial && tutorialStep <= TutorialSteps.INTRO_SCREENS,
+        isReadOnly
     };
 }
 

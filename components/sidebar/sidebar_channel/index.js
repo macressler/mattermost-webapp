@@ -10,6 +10,7 @@ import {get as getPreference} from 'mattermost-redux/selectors/entities/preferen
 import {savePreferences} from 'mattermost-redux/actions/preferences';
 import {leaveChannel} from 'mattermost-redux/actions/channels';
 import {getConfig} from 'mattermost-redux/selectors/entities/general';
+import {isFavoriteChannel} from 'mattermost-redux/utils/channel_utils';
 
 import {Constants, NotificationLevels} from 'utils/constants.jsx';
 
@@ -77,7 +78,8 @@ function makeMapStateToProps() {
             showUnreadForMsgs,
             unreadMsgs,
             unreadMentions,
-            membersCount
+            membersCount,
+            isFavorite: isFavoriteChannel(state.entities.preferences.myPreferences, channel.id)
         };
     };
 }
