@@ -98,6 +98,11 @@ export default class Sidebar extends React.PureComponent {
          */
         showUnreadSection: PropTypes.bool.isRequired,
 
+        /**
+         * Flag if TownSquare should be read only
+         */
+        isTownSquareReadOnly: PropTypes.bool.isRequired,
+
         actions: PropTypes.shape({
             goToChannelById: PropTypes.func.isRequired
         }).isRequired
@@ -462,6 +467,7 @@ export default class Sidebar extends React.PureComponent {
                 active={channelId === this.props.currentChannel.id}
                 currentTeamName={this.props.currentTeam.name}
                 currentUserId={this.props.currentUser.id}
+                isTownSquareReadOnly={this.props.isTownSquareReadOnly}
             />
         );
     }
