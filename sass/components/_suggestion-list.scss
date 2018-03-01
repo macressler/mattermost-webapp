@@ -10,6 +10,15 @@
             background: alpha-color($black, .1);
         }
     }
+
+    .badge {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        color: #3d3c40;
+        background: #cececf;
+        font-size: 10px;
+    }
 }
 
 .suggestion-list--top {
