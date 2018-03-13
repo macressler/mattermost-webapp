@@ -9,10 +9,8 @@ import {trackEvent} from 'actions/diagnostics_actions.jsx';
 import {updateUser, uploadProfileImage} from 'actions/user_actions.jsx';
 import ErrorStore from 'stores/error_store.jsx';
 import UserStore from 'stores/user_store.jsx';
-
 import Constants from 'utils/constants.jsx';
 import * as Utils from 'utils/utils.jsx';
-
 import SettingItemMax from 'components/setting_item_max.jsx';
 import SettingItemMin from 'components/setting_item_min.jsx';
 import SettingPicture from 'components/setting_picture.jsx';
@@ -116,9 +114,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         this.state = this.setupInitialState(props);
     }
 
-    submitUsername(e) {
-        e.preventDefault();
-
+    submitUsername() {
         const user = Object.assign({}, this.props.user);
         const username = this.state.username.trim().toLowerCase();
 
@@ -144,9 +140,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         this.submitUser(user, false);
     }
 
-    submitName(e) {
-        e.preventDefault();
-
+    submitName() {
         const user = Object.assign({}, this.props.user);
         const firstName = this.state.firstName.trim();
         const lastName = this.state.lastName.trim();
@@ -164,9 +158,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         this.submitUser(user, false);
     }
 
-    submitEmail(e) {
-        e.preventDefault();
-
+    submitEmail() {
         const user = Object.assign({}, this.props.user);
         const email = this.state.email.trim().toLowerCase();
         const confirmEmail = this.state.confirmEmail.trim().toLowerCase();
@@ -261,9 +253,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         );
     }
 
-    submitPosition(e) {
-        e.preventDefault();
-
+    submitPosition() {
         const user = Object.assign({}, this.props.user);
         const position = this.state.position.trim();
 
