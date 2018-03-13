@@ -4,15 +4,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {OverlayTrigger, Popover, Tooltip} from 'react-bootstrap';
-import {browserHistory} from 'react-router';
 
+import {browserHistory} from 'utils/browser_history';
 import {openDirectChannelToUser} from 'actions/channel_actions.jsx';
 import * as GlobalActions from 'actions/global_actions.jsx';
 import * as WebrtcActions from 'actions/webrtc_actions.jsx';
 import TeamStore from 'stores/team_store.jsx';
 import UserStore from 'stores/user_store.jsx';
 import WebrtcStore from 'stores/webrtc_store.jsx';
-
 import Constants from 'utils/constants.jsx';
 import * as Utils from 'utils/utils.jsx';
 
@@ -139,7 +138,7 @@ class ProfilePopoverNew extends React.Component {
 
         openDirectChannelToUser(
             user.id,
-            (channel) => {
+            () => {
                 if (Utils.isMobile()) {
                     GlobalActions.emitCloseRightHandSide();
                 }
@@ -147,7 +146,7 @@ class ProfilePopoverNew extends React.Component {
                 if (this.props.hide) {
                     this.props.hide();
                 }
-                browserHistory.push(TeamStore.getCurrentTeamRelativeUrl() + '/channels/' + channel.name);
+                browserHistory.push(`${TeamStore.getCurrentTeamRelativeUrl()}/messages/@${user.username}`);
             }
         );
     }
@@ -207,7 +206,7 @@ class ProfilePopoverNew extends React.Component {
                 <OverlayTrigger
                     key='user-popover-fullname-ot'
                     trigger={['hover', 'focus']}
-                    delayShow={300}
+                    delayShow={Constants.WEBRTC_TIME_DELAY}
                     placement='bottom'
                     overlay={(
                         <Tooltip id='whober_tooltip'>{`See ${firstname}'s whober profile`}</Tooltip>
@@ -237,6 +236,7 @@ class ProfilePopoverNew extends React.Component {
         if (this.props.user.position) {
             dataContent.push(
                 <OverlayTrigger
+                    key='user-popover-position-ot'
                     delayShow={Constants.WEBRTC_TIME_DELAY}
                     placement='top'
                     overlay={<Tooltip id='positionTooltip'>{this.props.user.position}</Tooltip>}
