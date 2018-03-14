@@ -4,6 +4,7 @@
 import EventEmitter from 'events';
 
 import {PreferenceTypes} from 'mattermost-redux/action_types';
+import {getConfig} from 'mattermost-redux/selectors/entities/general';
 import * as Selectors from 'mattermost-redux/selectors/entities/preferences';
 
 import store from 'stores/redux_store.jsx';
@@ -136,27 +137,19 @@ class PreferenceStore extends EventEmitter {
     }
 
     getTheme() {
-        const teamId = 12;
-        if (this.preferences.has(this.getKey(Constants.Preferences.CATEGORY_THEME, teamId))) {
-            return this.getObject(Constants.Preferences.CATEGORY_THEME, teamId);
-        }
+        const config = getConfig(store.getState());
+        let theme = Selectors.getTheme(store.getState());
 
-        if (this.preferences.has(this.getKey(Constants.Preferences.CATEGORY_THEME, ''))) {
-            return this.getObject(Constants.Preferences.CATEGORY_THEME, '');
-        }
-
-        for (const k in Constants.THEMES) {
-            if (Constants.THEMES.hasOwnProperty(k) && k === global.mm_config.DefaultTheme) {
-                return Constants.THEMES[k];
+        if (!theme || theme.type === 'Mattermost') {
+            for (const k in Constants.THEMES) {
+                if (Constants.THEMES.hasOwnProperty(k) && k === config.DefaultTheme) {
+                    theme = Constants.THEMES[k];
+                }
             }
         }
 
-        return Constants.THEMES.default;
+        return theme;
     }
-
-    /*getTheme() {
-        return Selectors.getTheme(store.getState());
-    }*/
 
     handleEventPayload(payload) {
         const action = payload.action;
