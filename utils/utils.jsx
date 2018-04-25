@@ -811,6 +811,12 @@ export function applyTheme(theme) {
         changeCss('.sidebar--right--expanded .sidebar--right__expand', 'color:' + theme.linkColor);
     }
 
+    if (theme.mentionHighlightBg === theme.linkColor) {
+        changeCss('.app__body .search-highlight .mention-link', 'color:' + theme.mentionHighlightLink);
+    } else {
+        changeCss('.app__body .search-highlight .mention-link', 'color:' + theme.linkColor);
+    }
+
     if (theme.buttonBg) {
         changeCss('.app__body .modal .settings-modal .team-img__remove:hover, .app__body .btn.btn-transparent:hover, .app__body .btn.btn-transparent:active, .app__body .post-image__details .post-image__download svg:hover, .app__body .file-view--single .file__download:hover, .app__body .new-messages__button div, .app__body .btn.btn-primary, .app__body .tutorial__circles .circle.active, .app__body .post__pinned-badge', 'background:' + theme.buttonBg);
         changeCss('.app__body .system-notice__logo svg', 'fill:' + theme.buttonBg);
