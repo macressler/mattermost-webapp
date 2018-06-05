@@ -1,5 +1,5 @@
-// Copyright (c) 2016-present Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+// Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
+// See LICENSE.txt for license information.
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -23,6 +23,10 @@ import emailIcon from 'images/icons/email_cta.png';
 import dmIcon from 'images/icons/dm_cta.png';
 import calendarIcon from 'images/icons/calendar_cta.png';
 
+/**
+ * The profile popover, or hovercard, that appears with user information when clicking
+ * on the username or profile picture of a user.
+ */
 class ProfilePopoverUchat extends React.Component {
     static getComponentName() {
         return 'ProfilePopoverUchat';
