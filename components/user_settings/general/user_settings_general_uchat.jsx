@@ -1,5 +1,5 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+// See LICENSE.txt for license information.
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -38,7 +38,7 @@ const holders = defineMessages({
     },
     validImage: {
         id: 'user.settings.general.validImage',
-        defaultMessage: 'Only JPG or PNG images may be used for profile pictures',
+        defaultMessage: 'Only BMP, JPG or PNG images may be used for profile pictures',
     },
     imageTooLarge: {
         id: 'user.settings.general.imageTooLarge',
@@ -235,7 +235,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         if (!ACCEPTED_PROFILE_IMAGE_TYPES.includes(file.type)) {
             this.setState({clientError: formatMessage(holders.validImage), serverError: ''});
             return;
-        } else if (file.size > this.state.maxFileSize) {
+        } else if (file.size > this.props.maxFileSize) {
             this.setState({clientError: formatMessage(holders.imageTooLarge), serverError: ''});
             return;
         }
@@ -560,8 +560,8 @@ class UserSettingsGeneralTabNew extends React.Component {
                     inputs={inputs}
                     submit={submit}
                     saving={this.state.sectionIsSaving}
-                    server_error={this.state.serverError}
-                    client_error={this.state.emailError}
+                    serverError={this.state.serverError}
+                    clientError={this.state.emailError}
                     updateSection={this.updateSection}
                 />
             );
@@ -685,9 +685,9 @@ class UserSettingsGeneralTabNew extends React.Component {
             let submit = null;
             if (
                 (this.props.user.auth_service === 'ldap' &&
-                    (this.props.ldapFirstNameAttributeSet === 'true' || this.props.ldapLastNameAttributeSet === 'true')) ||
+                    (this.props.ldapFirstNameAttributeSet || this.props.ldapLastNameAttributeSet)) ||
                 (this.props.user.auth_service === Constants.SAML_SERVICE &&
-                    (this.props.samlFirstNameAttributeSet === 'true' || this.props.samlLastNameAttributeSet === 'true'))
+                    (this.props.samlFirstNameAttributeSet || this.props.samlLastNameAttributeSet))
             ) {
                 extraInfo = (
                     <span>
@@ -712,10 +712,12 @@ class UserSettingsGeneralTabNew extends React.Component {
                         <div className='col-sm-7'>
                             <input
                                 id='firstName'
+                                autoFocus={true}
                                 className='form-control'
                                 type='text'
                                 onChange={this.updateFirstName}
                                 value={this.state.firstName}
+                                onFocus={Utils.moveCursorToEnd}
                             />
                         </div>
                     </div>
@@ -850,12 +852,14 @@ class UserSettingsGeneralTabNew extends React.Component {
                         <div className='col-sm-7'>
                             <input
                                 id='username'
+                                autoFocus={true}
                                 maxLength={Constants.MAX_USERNAME_LENGTH}
                                 className='form-control'
                                 type='text'
                                 onChange={this.updateUsername}
                                 value={this.state.username}
                                 autoCapitalize='off'
+                                onFocus={Utils.moveCursorToEnd}
                             />
                         </div>
                     </div>
@@ -910,7 +914,7 @@ class UserSettingsGeneralTabNew extends React.Component {
         if (this.props.activeSection === 'position') {
             let extraInfo;
             let submit = null;
-            if ((authService === 'ldap' || authService === Constants.SAML_SERVICE) && global.window.mm_config.PositionAttributeSet === 'true') {
+            if ((authService === 'ldap' || authService === Constants.SAML_SERVICE) && global.window.mm_config.positionAttributeSet) {
                 extraInfo = (
                     <span>
                         <FormattedMessage
@@ -946,6 +950,7 @@ class UserSettingsGeneralTabNew extends React.Component {
                                 value={this.state.position}
                                 maxLength={Constants.MAX_POSITION_LENGTH}
                                 autoCapitalize='off'
+                                onFocus={Utils.moveCursorToEnd}
                             />
                         </div>
                     </div>
@@ -1014,7 +1019,7 @@ class UserSettingsGeneralTabNew extends React.Component {
             pictureSection = (
                 <SettingPicture
                     title={formatMessage(holders.profilePicture)}
-                    submit={this.submitPicture}
+                    onSubmit={this.submitPicture}
                     src={Utils.imageURLForUser(user)}
                     serverError={serverError}
                     clientError={clientError}
