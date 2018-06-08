@@ -325,12 +325,8 @@ class ProfilePopoverUchat extends React.Component {
             dataContent.push(
                 <div
                     key='user-popover-local-time'
-                    className='padding-bottom half'
+                    className='padding-bottom half profile-popover-timezone'
                 >
-                    <FormattedMessage
-                        id='user_profile.account.localTime'
-                        defaultMessage='Local Time: '
-                    />
                     <LocalDateTime userTimezone={this.props.user.timezone}/>
                 </div>
             );
