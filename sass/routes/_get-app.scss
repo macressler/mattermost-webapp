@@ -136,18 +136,20 @@
     }
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (min-width:330px) and (max-width: 440px) {
     .get-app {
         .btn {
-            font-size: 18px;
+            font-size: 14px;
         }
     }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 330px) {
     .get-app {
         .btn {
-            font-size: 16px;
+            width: 100%;
+            margin: auto;
+            font-size: 12px;
         }
     }
 }
