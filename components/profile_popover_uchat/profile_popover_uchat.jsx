@@ -4,7 +4,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {OverlayTrigger, Popover, Tooltip} from 'react-bootstrap';
-import {FormattedMessage} from 'react-intl';
 
 import LocalDateTime from 'components/local_date_time';
 import {browserHistory} from 'utils/browser_history';
