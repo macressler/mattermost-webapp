@@ -17,6 +17,12 @@
     padding: 100px 0 50px;
     position: relative;
 
+    .signup__content {
+        h1 {
+            text-align: center;
+        }
+    }
+
     &.branded {
         @include display-flex;
         @include flex-direction(row);
