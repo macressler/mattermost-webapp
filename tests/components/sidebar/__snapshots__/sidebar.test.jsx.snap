@@ -56,57 +56,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -123,73 +91,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -206,52 +134,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -268,21 +177,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -368,93 +267,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
           id="favoriteChannel"
         >
           <FormattedMessage
-            defaultMessage="FAVORITE CHANNELS"
-            id="sidebar.favorite"
-            values={Object {}}
-          />
-        </h4>
-      </li>
-      <Connect(SidebarChannel)
-        active={true}
-        channelId="c1"
-        currentTeamName="test-team"
-        currentUserId="my-user-id"
-        key="c1"
-      />
-      <Connect(SidebarChannel)
-        active={false}
-        channelId="c3"
-        currentTeamName="test-team"
-        currentUserId="my-user-id"
-        key="c3"
-      />
-      <Connect(SidebarChannel)
-        active={false}
-        channelId="c5"
-        currentTeamName="test-team"
-        currentUserId="my-user-id"
-        key="c5"
-      />
-    </ul>
-    <ul
-      className="nav nav-pills nav-stacked"
-    >
-      <li>
-        <h4
-          id="publicChannel"
-        >
-          <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -471,73 +302,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -554,52 +345,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -616,21 +388,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -716,86 +478,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
           id="favoriteChannel"
         >
           <FormattedMessage
-            defaultMessage="UNREADS"
-            id="sidebar.unreadSection"
-            values={Object {}}
-          />
-        </h4>
-      </li>
-      <Connect(SidebarChannel)
-        active={false}
-        channelId="c3"
-        currentTeamName="test-team"
-        currentUserId="my-user-id"
-        key="c3"
-      />
-      <Connect(SidebarChannel)
-        active={false}
-        channelId="c5"
-        currentTeamName="test-team"
-        currentUserId="my-user-id"
-        key="c5"
-      />
-    </ul>
-    <ul
-      className="nav nav-pills nav-stacked"
-    >
-      <li>
-        <h4
-          id="publicChannel"
-        >
-          <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -812,73 +513,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -895,52 +556,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -957,21 +599,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should match snapshot,
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -1065,57 +697,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1132,73 +732,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1215,52 +775,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1277,21 +818,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -1377,57 +908,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1444,73 +943,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1527,52 +986,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1589,21 +1029,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -1693,57 +1123,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1760,73 +1158,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1843,52 +1201,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -1905,21 +1244,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -2005,57 +1334,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2072,73 +1369,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2155,52 +1412,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2217,21 +1455,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -2317,57 +1545,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2384,73 +1580,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2467,52 +1623,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2529,21 +1666,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
@@ -2629,57 +1756,25 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
   >
     <ul
       className="nav nav-pills nav-stacked"
+      key="public"
     >
       <li>
         <h4
-          id="publicChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PUBLIC CHANNELS"
-            id="sidebar.channels"
+            id="sidebar.types.public"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_public_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="public"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-channel-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new public channel"
-                    id="sidebar.createChannel"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPublicChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2696,73 +1791,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c2"
       />
-      <li>
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="sidebarChannelsMore"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="public"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="private"
     >
       <li>
         <h4
-          id="privateChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="PRIVATE CHANNELS"
-            id="sidebar.pg"
+            id="sidebar.types.private"
             values={Object {}}
           />
-          <Connect(TeamPermissionGate)
-            permissions={
-              Array [
-                "create_private_channel",
-              ]
-            }
+          <ChannelCreate
+            channelType="private"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
             teamId="team_id"
-          >
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              delayShow={500}
-              overlay={
-                <Tooltip
-                  bsClass="tooltip"
-                  id="new-group-tooltip"
-                  placement="right"
-                >
-                  <FormattedMessage
-                    defaultMessage="Create new private channel"
-                    id="sidebar.createGroup"
-                    values={Object {}}
-                  />
-                </Tooltip>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <button
-                className="add-channel-btn cursor--pointer style--none"
-                id="createPrivateChannel"
-                onClick={[Function]}
-              >
-                +
-              </button>
-            </OverlayTrigger>
-          </Connect(TeamPermissionGate)>
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2779,52 +1834,33 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c4"
       />
+      <ChannelMore
+        channelType="private"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
     <ul
       className="nav nav-pills nav-stacked"
+      key="direct"
     >
       <li>
         <h4
-          id="directChannel"
+          id="favoriteChannel"
         >
           <FormattedMessage
             defaultMessage="DIRECT MESSAGES"
-            id="sidebar.direct"
+            id="sidebar.types.direct"
             values={Object {}}
           />
-          <OverlayTrigger
-            className="hidden-xs"
-            defaultOverlayShown={false}
-            delayShow={500}
-            overlay={
-              <Tooltip
-                bsClass="tooltip"
-                className="hidden-xs"
-                id="new-group-tooltip"
-                placement="right"
-              >
-                <FormattedMessage
-                  defaultMessage="Create new direct message"
-                  id="sidebar.createDirectMessage"
-                  values={Object {}}
-                />
-              </Tooltip>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <button
-              className="add-channel-btn cursor--pointer style--none"
-              onClick={[Function]}
-            >
-              +
-            </button>
-          </OverlayTrigger>
+          <ChannelCreate
+            channelType="direct"
+            createDirectMessage={[Function]}
+            createPrivateChannel={[Function]}
+            createPublicChannel={[Function]}
+            createPublicDirectChannel={[Function]}
+            teamId="team_id"
+          />
         </h4>
       </li>
       <Connect(SidebarChannel)
@@ -2841,21 +1877,11 @@ exports[`component/sidebar/sidebar_channel/SidebarChannel should show/hide corre
         currentUserId="my-user-id"
         key="c6"
       />
-      <li
-        key="more"
-      >
-        <button
-          className="nav-more cursor--pointer style--none btn--block"
-          id="moreDirectMessage"
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            defaultMessage="More..."
-            id="sidebar.moreElips"
-            values={Object {}}
-          />
-        </button>
-      </li>
+      <ChannelMore
+        channelType="direct"
+        moreChannels={[Function]}
+        moreDirectMessages={[Function]}
+      />
     </ul>
   </div>
   <div
