@@ -5,7 +5,7 @@ import React, {PureComponent} from 'react';
 import {FormattedMessage} from 'react-intl';
 import safeOpenProtocol from 'custom-protocol-detection';
 
-import MattermostLogoSvg from 'images/logo.svg';
+import logoImage from 'images/uchat_color.png';
 
 export default class GoNativeApp extends PureComponent {
     constructor(props) {
@@ -20,10 +20,10 @@ export default class GoNativeApp extends PureComponent {
         const {protocolUnsupported, browserUnsupported} = this.state;
 
         let nativeLocation = window.location.href.replace('/vault#', '');
-        nativeLocation = nativeLocation.replace(/^(http|https)/, 'mattermost');
+        nativeLocation = nativeLocation.replace(/^(http|https)/, 'uberchat');
 
         //***** TESTING PURPOSE - REMOVE BEFORE MERGE ****
-        nativeLocation = nativeLocation.replace(/\/\/[^/]+/, '//pre-release.mattermost.com');
+        nativeLocation = nativeLocation.replace(/\/\/[^/]+/, '//uchat.uberinternal.com');
 
         safeOpenProtocol(nativeLocation,
             () => this.setState({protocolUnsupported: true}),
@@ -36,7 +36,7 @@ export default class GoNativeApp extends PureComponent {
             goNativeAppMessage = (
                 <FormattedMessage
                     id='get_app.protocolUnsupported'
-                    defaultMessage='Unable to open Mattermost.'
+                    defaultMessage='Unable to open uChat.'
                 />
             );
         } else if (browserUnsupported) {
@@ -50,7 +50,7 @@ export default class GoNativeApp extends PureComponent {
             goNativeAppMessage = (
                 <FormattedMessage
                     id='get_app.systemDialogMessage'
-                    defaultMessage='Please click `Open Mattermost` if you see the system dialog.'
+                    defaultMessage='Please click `Open uChat` if you see the system dialog.'
                 />
             );
         }
@@ -59,7 +59,7 @@ export default class GoNativeApp extends PureComponent {
         return (
             <div className='get-app get-app--android'>
                 <img
-                    src={MattermostLogoSvg}
+                    src={logoImage}
                     className='get-app__logo'
                 />
                 <div className='get-app__launching'>
@@ -80,11 +80,11 @@ export default class GoNativeApp extends PureComponent {
                     </div>
                     <a
                         href='/downloads'
-                        className='btn btn-primary get-app__download'
+                        className='btn btn-primary get-android-app__open-mattermost'
                     >
                         <FormattedMessage
                             id='get_app.downloadMattermost'
-                            defaultMessage='Download & run Mattermost'
+                            defaultMessage='Download & run uChat'
                         />
                     </a>
                 </div>
